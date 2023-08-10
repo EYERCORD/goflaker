@@ -74,7 +74,7 @@ type DefaultSnowflakeGenerator struct {
 
 func (dsg DefaultSnowflakeGenerator) Make(data uintptr) Snowflake {
 	res := dsg.Builder.Make(&SnowflakeStructure{
-		Timestamp:         uint64(time.Now().UTC().UnixMilli()) - dsg.Builder.epoch,
+		Timestamp:         uint64(time.Now().UTC().UnixMilli()),
 		InternalWorkerId:  dsg.InternalWorkerId,
 		InternalProcessId: uint8(os.Getpid()),
 		Increment:         dsg.Increment,
