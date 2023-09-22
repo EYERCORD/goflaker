@@ -28,7 +28,7 @@ func (sb SnowflakeBuilder) Epoch() uint64 {
 	return sb.epoch
 }
 
-func (sb SnowflakeBuilder) From(value uint64) *Snowflake {
+func (sb *SnowflakeBuilder) From(value uint64) *Snowflake {
 	return &Snowflake{
 		value:   value,
 		builder: &sb,
@@ -49,7 +49,7 @@ func (sb SnowflakeBuilder) Make(options *SnowflakeStructure) Snowflake {
 	return res
 }
 
-func (sb SnowflakeBuilder) DefaultGenerator(internalWorkerId uint8) *DefaultSnowflakeGenerator {
+func (sb *SnowflakeBuilder) DefaultGenerator(internalWorkerId uint8) *DefaultSnowflakeGenerator {
 	return &DefaultSnowflakeGenerator{
 		InternalWorkerId: internalWorkerId,
 		Builder:          &sb,
@@ -186,6 +186,6 @@ func Initialize() {
 	if initalized {
 		panic("Initialized")
 	}
-	DiscordGenerator = DiscordBuilder.DefaultGenerator(0).(*DefaultSnowflakeGenerator)
+	DiscordGenerator = DiscordBuilder.DefaultGenerator(0)
 	initalized = true
 }
