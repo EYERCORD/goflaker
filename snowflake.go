@@ -177,7 +177,7 @@ const (
 
 var (
 	DiscordBuilder    SnowflakeBuilder = NewBuilder(DiscordEpoch)
-	DiscordGenerator  DefaultSnowflakeGenerator
+	DiscordGenerator  *DefaultSnowflakeGenerator
 
 	initalized        bool = false
 )
@@ -186,6 +186,6 @@ func Initialize() {
 	if initalized {
 		panic("Initialized")
 	}
-	DiscordGenerator = DiscordBuilder.DefaultGenerator(0).(DefaultSnowflakeGenerator)
+	DiscordGenerator = DiscordBuilder.DefaultGenerator(0).(*DefaultSnowflakeGenerator)
 	initalized = true
 }
