@@ -38,7 +38,7 @@ func (sb *SnowflakeBuilder) From(value uint64) *Snowflake {
 func (sb *SnowflakeBuilder) Make(options *SnowflakeStructure) Snowflake {
 	res := Snowflake{
 		value:   0,
-		builder: &sb,
+		builder: sb,
 	}
 	if options != nil {
 		res.SetTimestamp(options.Timestamp)
