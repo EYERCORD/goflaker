@@ -18,8 +18,8 @@ type SnowflakeBuilder struct {
 	epoch uint64
 }
 
-func NewBuilder(epoch uint64) SnowflakeBuilder {
-	return SnowflakeBuilder{
+func NewBuilder(epoch uint64) *SnowflakeBuilder {
+	return &SnowflakeBuilder{
 		epoch: epoch,
 	}
 }
@@ -31,11 +31,11 @@ func (sb SnowflakeBuilder) Epoch() uint64 {
 func (sb *SnowflakeBuilder) From(value uint64) *Snowflake {
 	return &Snowflake{
 		value:   value,
-		builder: &sb,
+		builder: sb,
 	}
 }
 
-func (sb SnowflakeBuilder) Make(options *SnowflakeStructure) Snowflake {
+func (sb *SnowflakeBuilder) Make(options *SnowflakeStructure) Snowflake {
 	res := Snowflake{
 		value:   0,
 		builder: &sb,
@@ -52,7 +52,7 @@ func (sb SnowflakeBuilder) Make(options *SnowflakeStructure) Snowflake {
 func (sb *SnowflakeBuilder) DefaultGenerator(internalWorkerId uint8) *DefaultSnowflakeGenerator {
 	return &DefaultSnowflakeGenerator{
 		InternalWorkerId: internalWorkerId,
-		Builder:          &sb,
+		Builder:          sb,
 		Increment:        0,
 	}
 }
@@ -176,7 +176,7 @@ const (
 )
 
 var (
-	DiscordBuilder    SnowflakeBuilder = NewBuilder(DiscordEpoch)
+	DiscordBuilder    *SnowflakeBuilder = NewBuilder(DiscordEpoch)
 	DiscordGenerator  *DefaultSnowflakeGenerator
 
 	initalized        bool = false
