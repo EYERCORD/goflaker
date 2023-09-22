@@ -49,7 +49,7 @@ func (sb SnowflakeBuilder) Make(options *SnowflakeStructure) Snowflake {
 	return res
 }
 
-func (sb SnowflakeBuilder) DefaultGenerator(internalWorkerId uint8) SnowflakeGenerator[uintptr] {
+func (sb SnowflakeBuilder) DefaultGenerator(internalWorkerId uint8) DefaultSnowflakeGenerator {
 	return DefaultSnowflakeGenerator{
 		InternalWorkerId: internalWorkerId,
 		Builder:          &sb,
@@ -72,7 +72,7 @@ type DefaultSnowflakeGenerator struct {
 	Increment        uint16
 }
 
-func (dsg DefaultSnowflakeGenerator) Make(data uintptr) Snowflake {
+func (dsg *DefaultSnowflakeGenerator) Make(data uintptr) Snowflake {
 	res := dsg.Builder.Make(&SnowflakeStructure{
 		Timestamp:         uint64(time.Now().UTC().UnixMilli()),
 		InternalWorkerId:  dsg.InternalWorkerId,
