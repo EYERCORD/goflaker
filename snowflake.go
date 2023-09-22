@@ -172,11 +172,11 @@ func (s *Snowflake) UnmarshalJSON(data []byte) error {
 }
 
 const (
-	DISCORD_EPOCH  uint64 = 1420070400000
+	DiscordEpoch      uint64 = 1420070400000
 )
 
 var (
-	DiscordBuilder    SnowflakeBuilder = NewBuilder(DISCORD_EPOCH)
+	DiscordBuilder    SnowflakeBuilder = NewBuilder(DiscordEpoch)
 	DiscordGenerator  DefaultSnowflakeGenerator
 
 	initalized        bool = false
