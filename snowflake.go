@@ -49,8 +49,8 @@ func (sb SnowflakeBuilder) Make(options *SnowflakeStructure) Snowflake {
 	return res
 }
 
-func (sb SnowflakeBuilder) DefaultGenerator(internalWorkerId uint8) DefaultSnowflakeGenerator {
-	return DefaultSnowflakeGenerator{
+func (sb SnowflakeBuilder) DefaultGenerator(internalWorkerId uint8) *DefaultSnowflakeGenerator {
+	return &DefaultSnowflakeGenerator{
 		InternalWorkerId: internalWorkerId,
 		Builder:          &sb,
 		Increment:        0,
